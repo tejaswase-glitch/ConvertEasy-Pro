@@ -2,9 +2,42 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="converteasy-resize-fix" content="converteasy-resize-fix-v2">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#5b4bff">
-<title>ConvertEasy Pro</title>
+<meta name="application-name" content="ConvertEasy Pro">
+<meta name="description" content="ConvertEasy Pro is a browser-based file converter and image resizer. Convert, resize, rename and share files easily with local browser processing and no automatic file storage.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://tejaswase-glitch.github.io/ConvertEasy-Pro/">
+<link rel="icon" type="image/png" sizes="128x128" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ConvertEasy Pro">
+<meta property="og:title" content="ConvertEasy Pro – Online File Converter & Image Resizer">
+<meta property="og:description" content="Convert, resize, rename and share files easily in your browser with ConvertEasy Pro.">
+<meta property="og:url" content="https://tejaswase-glitch.github.io/ConvertEasy-Pro/">
+<title>ConvertEasy Pro – Online File Converter & Image Resizer</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "ConvertEasy Pro",
+      "alternateName": ["ConvertEasy Pro File Converter", "converteasy-pro"],
+      "url": "https://tejaswase-glitch.github.io/ConvertEasy-Pro/"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "ConvertEasy Pro",
+      "url": "https://tejaswase-glitch.github.io/ConvertEasy-Pro/",
+      "description": "Browser-based file converter and image resizer for converting, resizing, renaming and sharing files.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web Browser"
+    }
+  ]
+}
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -100,7 +133,7 @@ body{background:linear-gradient(135deg,#eef8ff 0%,#f5efff 48%,#eafbf7 100%) !imp
 .dashboard-message strong{display:block;font-size:18px;margin-bottom:5px}
 .dashboard-message p{margin:0;color:#68718a;font-size:14px;line-height:1.55}
 .dashboard-privacy{width:min(920px,100%);margin:12px auto 4px !important;line-height:1.55}
-#conversionResizeBtn,#resizeOnlyBtn{display:none !important}
+/* Button visibility is controlled by the resize workflow; do not force-hide these buttons. */
 </style>
 <style id="modern-theme">
 :root{
@@ -189,6 +222,17 @@ h1,h2,h3{letter-spacing:-.02em;}
   color:#fff !important;
 }
 
+
+/* Mobile-friendly page scrolling fix */
+html{overflow-x:hidden !important;overflow-y:auto !important;}
+body{overflow-x:hidden !important;overflow-y:auto !important;min-height:100vh;}
+#dashboard-view{overflow:visible !important;height:auto !important;min-height:calc(100vh - 78px) !important;}
+@media (max-width: 700px){
+  html,body{overflow-x:hidden !important;overflow-y:auto !important;-webkit-overflow-scrolling:touch;}
+  #dashboard-view{height:auto !important;min-height:calc(100vh - 78px) !important;overflow:visible !important;padding-bottom:40px !important;}
+  .home-select{padding-bottom:80px !important;}
+}
+
 /* ConvertEasy Pro modern privacy-first web layout */
 .app-header{
   position:sticky !important; top:0 !important; height:78px !important; padding:14px clamp(20px,4vw,56px) !important;
@@ -247,6 +291,265 @@ select,.num-input{background:#fff !important;border:1px solid #dfe3f2 !important
 }
 @media(min-width:801px){.preview-panel{position:sticky;top:160px}}
 </style>
+<style id="professional-dashboard-theme">
+.app-header{height:74px !important;padding:10px 22px !important;background:linear-gradient(135deg,#08111f 0%,#111827 52%,#1e293b 100%) !important;color:#f8fafc !important;box-shadow:0 10px 28px rgba(2,6,23,.28) !important;}
+.logo-svg{width:50px !important;height:50px !important;flex:none;filter:drop-shadow(0 5px 12px rgba(0,0,0,.28));}
+#app-title{color:#f8fafc !important;font-weight:800 !important;letter-spacing:.2px;}
+#dashboard-view{margin-top:74px !important;height:calc(100vh - 154px) !important;}
+.home-select{padding-top:34px !important;padding-bottom:38px !important;}
+.home-select p{margin-bottom:24px !important;}
+.select-options{margin-top:14px !important;}
+.dashboard-professional{width:min(1180px,100%);margin:28px auto 0;padding:30px;border-radius:28px;background:linear-gradient(135deg,#101827 0%,#172238 58%,#202b42 100%);border:1px solid rgba(148,163,184,.22);box-shadow:0 20px 45px rgba(15,23,42,.16);color:#f8fafc;text-align:left;}
+.dashboard-professional-heading{max-width:760px;margin-bottom:22px;}
+.dashboard-eyebrow{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1.8px;color:#67e8f9;margin-bottom:8px;}
+.dashboard-professional h2{font-size:clamp(23px,3vw,32px);line-height:1.15;margin:0 0 8px;color:#f8fafc;}
+.dashboard-professional-heading p{margin:0;color:#b7c2d4;font-size:14px;line-height:1.55;}
+.professional-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+.professional-card{display:flex;align-items:center;gap:14px;min-height:96px;padding:18px;border-radius:20px;background:rgba(255,255,255,.055);border:1px solid rgba(148,163,184,.16);}
+.professional-card-icon{width:48px;height:48px;border-radius:15px;display:flex;align-items:center;justify-content:center;flex:none;font-size:25px;font-weight:800;color:#fff;background:linear-gradient(135deg,#4f46e5,#06b6d4);}
+.professional-card-icon.resize{background:linear-gradient(135deg,#7c3aed,#ec4899)}
+.professional-card-icon.manage{background:linear-gradient(135deg,#059669,#14b8a6)}
+.professional-card strong{display:block;font-size:16px;margin-bottom:4px;color:#fff;}
+.professional-card span{display:block;color:#aebbd0;font-size:12px;line-height:1.45;}
+.dashboard-trust-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+.dashboard-trust-row span{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(148,163,184,.14);color:#cbd5e1;font-size:12px;font-weight:600;}
+@media(max-width:800px){.app-header{height:68px !important;padding:8px 15px !important}.logo-svg{width:46px !important;height:46px !important}#dashboard-view{margin-top:68px !important;height:calc(100vh - 148px) !important}.dashboard-professional{padding:22px 18px;border-radius:24px;margin-top:22px}.professional-grid{grid-template-columns:1fr;gap:10px}.professional-card{min-height:78px}}
+</style>
+
+<style id="mobile-layout-fix">
+/* Clean mobile screen layout: the view header scrolls with its own screen and stays at the top of that screen. */
+#conversion-view, #file-viewer-view{
+  padding-top:0 !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+#conversion-view .view-header, #file-viewer-view .view-header{
+  position:sticky !important;
+  top:0 !important;
+  left:auto !important;
+  width:100% !important;
+  height:64px !important;
+  flex:none !important;
+  box-sizing:border-box !important;
+  padding:8px 14px !important;
+  z-index:120 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  background:rgba(255,255,255,.97) !important;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid #e3e7f2 !important;
+  box-shadow:0 4px 16px rgba(15,23,42,.08) !important;
+}
+#conversion-view .view-header strong{
+  margin-left:auto !important;
+  font-size:20px !important;
+  white-space:nowrap !important;
+}
+.back-btn{
+  min-width:104px !important;
+  min-height:46px !important;
+  padding:10px 16px !important;
+  border-radius:14px !important;
+  background:#eef2ff !important;
+  color:#25204d !important;
+  font-size:18px !important;
+  font-weight:800 !important;
+  justify-content:center !important;
+  touch-action:manipulation !important;
+}
+#conversion-view .conversion-workspace{
+  width:min(1240px,calc(100% - 28px)) !important;
+  margin:20px auto 50px !important;
+}
+#file-viewer-view .viewer-body{
+  padding-top:20px !important;
+}
+@media(max-width:800px){
+  #conversion-view .view-header, #file-viewer-view .view-header{height:60px !important;padding:7px 12px !important}
+  #conversion-view .view-header strong{font-size:18px !important}
+  #conversion-view .conversion-workspace{width:calc(100% - 16px) !important;margin:12px auto 40px !important;gap:12px !important}
+  #conversion-view .workspace-card{width:100% !important;padding:16px !important;border-radius:20px !important}
+  #conversion-view .preview-panel{min-height:0 !important}
+  #conversion-view .preview-wrap{min-height:250px !important;padding:12px !important}
+  #conversion-view .privacy-note{font-size:13px !important;padding:11px 12px !important}
+  #conversion-view .conversion-controls{width:100% !important}
+  #conversion-view .file-info-row{align-items:flex-start !important}
+  #conversion-view .file-info-row span{max-width:62% !important;text-align:right !important;overflow-wrap:anywhere !important}
+  .back-btn{min-width:96px !important;min-height:44px !important;font-size:17px !important;padding:9px 14px !important}
+  #file-viewer-view .viewer-body{padding:14px 10px 100px !important}
+}
+</style>
+
+<style id="final-polish-v4">
+/* Deep, colorful app background */
+html,body{background:
+  radial-gradient(circle at 12% 8%,rgba(99,102,241,.22),transparent 30%),
+  radial-gradient(circle at 88% 18%,rgba(6,182,212,.18),transparent 28%),
+  radial-gradient(circle at 50% 92%,rgba(168,85,247,.16),transparent 32%),
+  linear-gradient(145deg,#070b16 0%,#10172a 42%,#111827 72%,#0b1220 100%) !important;
+  color:#f8fafc !important;
+}
+body{min-height:100vh !important;}
+.select-icon svg{width:44px;height:44px;}
+/* Dashboard */
+#dashboard-view{background:transparent !important;color:#f8fafc !important;}
+.home-select{max-width:1220px !important;padding-left:clamp(16px,4vw,42px) !important;padding-right:clamp(16px,4vw,42px) !important;}
+.home-select h1{color:#f8fafc !important;}
+.home-select p{color:#aab7cf !important;}
+.home-select-title{background:linear-gradient(135deg,#4f46e5,#7c3aed 55%,#06b6d4) !important;box-shadow:0 14px 35px rgba(79,70,229,.30) !important;}
+.select-card{background:linear-gradient(145deg,rgba(24,34,58,.96),rgba(15,23,42,.96)) !important;border:1px solid rgba(148,163,184,.18) !important;color:#f8fafc !important;box-shadow:0 18px 42px rgba(0,0,0,.20) !important;}
+.select-card strong{color:#f8fafc !important;}
+.select-card:hover{box-shadow:0 22px 48px rgba(6,182,212,.13) !important;transform:translateY(-4px);}
+.select-icon{background:linear-gradient(135deg,#312e81,#164e63) !important;color:#fff !important;border:1px solid rgba(255,255,255,.10);}
+.gallery .select-icon{background:linear-gradient(135deg,#3730a3,#2563eb) !important;}
+.camera .select-icon{background:linear-gradient(135deg,#7e22ce,#db2777) !important;}
+.files .select-icon{background:linear-gradient(135deg,#047857,#0891b2) !important;}
+.resize-only .select-icon{background:linear-gradient(135deg,#b45309,#ea580c) !important;}
+.select-arrow{background:rgba(255,255,255,.10) !important;color:#fff !important;border:1px solid rgba(255,255,255,.10);}
+.dashboard-message{background:linear-gradient(135deg,rgba(30,41,59,.92),rgba(49,46,129,.72)) !important;border-color:rgba(129,140,248,.25) !important;color:#f8fafc !important;box-shadow:0 18px 40px rgba(0,0,0,.16) !important;}
+.dashboard-message p{color:#c1cbe0 !important;}
+.dashboard-message-icon{background:linear-gradient(135deg,#4f46e5,#06b6d4) !important;color:#fff !important;}
+.dashboard-privacy{background:linear-gradient(135deg,rgba(6,78,59,.72),rgba(8,47,73,.78)) !important;border-color:rgba(45,212,191,.20) !important;color:#b7f7e8 !important;}
+.dashboard-professional{background:linear-gradient(145deg,#0b1220,#111c33 58%,#172554) !important;border-color:rgba(96,165,250,.20) !important;}
+/* Internal conversion screen */
+#conversion-view,#file-viewer-view{background:
+  radial-gradient(circle at 10% 8%,rgba(99,102,241,.22),transparent 30%),
+  radial-gradient(circle at 90% 18%,rgba(6,182,212,.16),transparent 30%),
+  linear-gradient(145deg,#080d19,#10182b 60%,#0b1220) !important;
+}
+/* The top bar is part of the scrolling screen, not fixed/sticky */
+#conversion-view .view-header,#file-viewer-view .view-header{
+  position:relative !important;top:auto !important;left:auto !important;
+  height:76px !important;min-height:76px !important;width:100% !important;
+  background:rgba(8,13,25,.94) !important;color:#f8fafc !important;
+  border-bottom:1px solid rgba(148,163,184,.16) !important;
+  box-shadow:0 10px 25px rgba(0,0,0,.20) !important;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  flex:none !important;
+}
+#conversion-view .view-header strong{color:#f8fafc !important;font-size:21px !important;}
+.back-btn{
+  min-width:0 !important;width:auto !important;min-height:46px !important;
+  padding:10px 18px !important;border-radius:14px !important;
+  background:linear-gradient(135deg,#1e293b,#312e81) !important;
+  color:#fff !important;border:1px solid rgba(129,140,248,.24) !important;
+  box-shadow:0 7px 18px rgba(0,0,0,.18) !important;
+}
+.conversion-workspace{margin:20px auto 60px !important;}
+.workspace-card{background:rgba(15,23,42,.78) !important;border-color:rgba(148,163,184,.18) !important;box-shadow:0 20px 50px rgba(0,0,0,.24) !important;color:#f8fafc !important;}
+.workspace-card h2,.conversion-controls h3,.result-preview-card h4{color:#f8fafc !important;}
+.preview-wrap{background:linear-gradient(145deg,rgba(30,41,59,.90),rgba(49,46,129,.32),rgba(8,47,73,.45)) !important;border-color:rgba(129,140,248,.25) !important;}
+.preview-block{background:rgba(2,6,23,.24) !important;border:1px solid rgba(148,163,184,.10) !important;border-radius:18px !important;padding:12px !important;}
+.preview-label{color:#a5b4fc !important;}
+#preview,#result-preview{background:#0b1220 !important;border:1px solid rgba(148,163,184,.16) !important;box-shadow:0 12px 28px rgba(0,0,0,.28) !important;}
+#pdf-preview-frame,#source-pdf-preview-frame{background:#fff !important;}
+.file-info{background:linear-gradient(145deg,rgba(30,41,59,.94),rgba(49,46,129,.30)) !important;border-color:rgba(148,163,184,.18) !important;color:#cbd5e1 !important;}
+.file-info strong{color:#fff !important;}
+select,.num-input,.rename-input{background:#111827 !important;color:#f8fafc !important;border-color:#334155 !important;}
+.result-preview-card{background:linear-gradient(145deg,rgba(6,78,59,.26),rgba(30,41,59,.85)) !important;border-color:rgba(45,212,191,.22) !important;color:#f8fafc !important;}
+.result-preview-label{color:#a7f3d0 !important;}
+.privacy-note{background:linear-gradient(135deg,rgba(6,78,59,.35),rgba(8,47,73,.45)) !important;border-color:rgba(45,212,191,.20) !important;color:#a7f3d0 !important;}
+/* Bigger result preview */
+#result-preview-block{min-height:320px !important;}
+#result-preview-block #result-preview{display:block !important;width:100% !important;height:auto !important;min-height:240px !important;max-height:62vh !important;object-fit:contain !important;}
+/* Custom logo stays crisp and prominent */
+.app-header .logo-svg{width:54px !important;height:54px !important;}
+@media(max-width:800px){
+  .app-header .logo-svg{width:48px !important;height:48px !important;}
+  .home-select{padding-top:24px !important;padding-bottom:30px !important;}
+  .select-options{gap:12px !important;}
+  .select-card{min-height:128px !important;padding:16px !important;}
+  #conversion-view .view-header,#file-viewer-view .view-header{height:68px !important;min-height:68px !important;padding:8px 12px !important;}
+  #conversion-view .view-header strong{font-size:18px !important;}
+  .back-btn{min-height:46px !important;padding:9px 15px !important;font-size:17px !important;}
+  #conversion-view .conversion-workspace{width:calc(100% - 16px) !important;margin:14px auto 42px !important;}
+  #conversion-view .workspace-card{padding:14px !important;}
+  #conversion-view .preview-wrap{min-height:310px !important;padding:10px !important;}
+  #result-preview-block #result-preview{min-height:250px !important;max-height:50vh !important;}
+}
+
+/* High-contrast selection labels: readable on every phone */
+.select-card{color:#172033 !important;background:linear-gradient(145deg,#ffffff,#f3f6ff) !important;border:1px solid #d8def0 !important;}
+.select-card strong{color:#172033 !important;font-size:18px !important;font-weight:800 !important;text-shadow:none !important;}
+.select-arrow{color:#4f46e5 !important;font-weight:900 !important;font-size:24px !important;}
+.select-icon{color:#ffffff !important;}
+.gallery{background:linear-gradient(145deg,#eef6ff,#e6efff) !important;}
+.camera{background:linear-gradient(145deg,#f7efff,#efe7ff) !important;}
+.files{background:linear-gradient(145deg,#edfff8,#e2f8f1) !important;}
+.resize-only{background:linear-gradient(145deg,#fff7eb,#ffeed9) !important;}
+.home-select p{color:#475569 !important;}
+
+/* Final resize UX: one button, visible brand logo, and increase/decrease controls */
+.view-header{justify-content:space-between !important;}
+.view-brand{display:flex;align-items:center;gap:9px;margin-left:auto;color:#f8fafc;font-weight:800;}
+.view-logo{width:38px;height:38px;flex:none;filter:drop-shadow(0 4px 10px rgba(0,0,0,.3));}
+.view-brand strong{font-size:18px;letter-spacing:.1px;color:#f8fafc !important;}
+.resize-stepper{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;gap:10px;align-items:center;margin-bottom:7px;}
+.resize-step-btn{height:52px;border:0;border-radius:15px;background:linear-gradient(135deg,#1e40af,#7c3aed);color:#fff;font-size:30px;font-weight:800;line-height:1;box-shadow:0 7px 18px rgba(49,46,129,.25);cursor:pointer;}
+.resize-step-btn:active{transform:scale(.96);}
+#resize-input{text-align:center;font-size:20px !important;font-weight:800 !important;min-width:0;}
+.resize-range-note{text-align:center;color:#64748b;font-size:12px;margin:0 0 14px;}
+/* Only the unified Resize control is allowed to appear in the action row. */
+#resizeOnlyBtn,#conversionResizeBtn{display:none !important;}
+
+/* Final universal layout/resize fixes */
+#dashboard-view{height:auto !important;min-height:calc(100vh - 74px) !important;overflow:visible !important;}
+.home-select{line-height:1.45 !important;}
+.dashboard-message,.dashboard-message *,.dashboard-professional,.dashboard-professional *{box-sizing:border-box !important;}
+.dashboard-message p,.dashboard-professional-heading p,.professional-card span{line-height:1.5 !important;overflow-wrap:anywhere !important;}
+.professional-card strong{line-height:1.25 !important;}
+.view-brand{flex-shrink:0 !important;}
+.view-brand strong{white-space:nowrap !important;}
+.resize-step-btn{display:flex !important;align-items:center !important;justify-content:center !important;font-family:Arial,sans-serif !important;font-size:28px !important;}
+@media(max-width:800px){
+  #dashboard-view{height:auto !important;min-height:calc(100vh - 68px) !important;overflow:visible !important;}
+  .home-select{padding-top:26px !important;padding-bottom:42px !important;}
+  .select-options{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:14px !important;max-width:900px !important;}
+  .select-card{min-height:150px !important;padding:16px 12px !important;display:flex !important;text-align:center !important;gap:10px !important;align-items:center !important;justify-content:center !important;}
+  .select-card strong{font-size:18px !important;line-height:1.2 !important;white-space:normal !important;}
+  .select-icon{width:62px !important;height:62px !important;font-size:36px !important;}
+  .select-arrow{width:36px !important;height:36px !important;font-size:20px !important;}
+  .dashboard-message{margin-top:18px !important;padding:16px !important;display:flex !important;gap:12px !important;align-items:flex-start !important;}
+  .dashboard-message p{margin-top:5px !important;margin-bottom:0 !important;}
+  .dashboard-professional{margin-top:18px !important;padding:20px 16px !important;}
+  .professional-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:10px !important;}
+  .professional-card{min-height:108px !important;padding:14px !important;align-items:flex-start !important;}
+  .professional-card-icon{width:40px !important;height:40px !important;font-size:21px !important;}
+  .professional-card strong{font-size:14px !important;}
+  .professional-card span{font-size:11px !important;}
+  .dashboard-trust-row{gap:7px !important;}
+  .dashboard-trust-row span{font-size:11px !important;padding:7px 9px !important;}
+  .view-brand strong{font-size:15px !important;}
+  .view-logo{width:40px !important;height:40px !important;}
+}
+@media(max-width:430px){
+  .select-card{min-height:140px !important;}
+  .professional-grid{grid-template-columns:1fr !important;}
+  .professional-card{min-height:82px !important;}
+}
+@media(max-width:800px){
+  .view-logo{width:42px;height:42px;}
+  .view-brand strong{font-size:16px;}
+  .view-header{padding-left:10px !important;padding-right:12px !important;}
+  .resize-stepper{grid-template-columns:48px minmax(0,1fr) 48px;gap:8px;}
+  .resize-step-btn{height:50px;}
+}
+</style>
+
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"ConvertEasy Pro",
+  "alternateName":"ConvertEasy Pro File Converter",
+  "url":"https://tejaswase-glitch.github.io/ConvertEasy-Pro/",
+  "logo":"https://tejaswase-glitch.github.io/ConvertEasy-Pro/favicon.png"
+}
+</script>
 </head>
 <body>
 
@@ -261,7 +564,7 @@ select,.num-input{background:#fff !important;border:1px solid #dfe3f2 !important
       <rect x="32" y="32" width="448" height="448" rx="100" fill="url(#baseWhite)"/>
       <g transform="rotate(-15 200 256)"><rect x="110" y="126" width="180" height="260" rx="40" fill="url(#gradLeft)" opacity=".85"/></g>
       <g transform="rotate(15 312 256)"><rect x="222" y="126" width="180" height="260" rx="40" fill="url(#gradRight)" opacity=".85"/></g>
-      <circle cx="256" cy="256" r="64" fill="#fff"/>
+      <circle cx="256" cy="256" r="64" fill="#111827" stroke="#334155" stroke-width="6"/>
       <path d="M220 236h44v-12l28 18-28 18v-12h-44z" fill="url(#gradRight)"/>
       <path d="M292 264h-44v-12l-28 18 28 18v-12h44z" fill="url(#gradLeft)"/>
     </svg>
@@ -270,12 +573,12 @@ select,.num-input{background:#fff !important;border:1px solid #dfe3f2 !important
 </div>
 
 <div class="app-header">
-  <svg class="logo-svg" viewBox="0 0 512 512">
+  <svg class="logo-svg" viewBox="0 0 512 512" aria-label="ConvertEasy Pro logo">
     <defs><linearGradient id="hL" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#FF0F7B"/><stop offset="100%" stop-color="#F89B29"/></linearGradient><linearGradient id="hR"><stop offset="0%" stop-color="#4776E6"/><stop offset="100%" stop-color="#8E54E9"/></linearGradient></defs>
-    <rect x="32" y="32" width="448" height="448" rx="100" fill="#f1f3f4"/>
+    <rect x="32" y="32" width="448" height="448" rx="100" fill="#0b1220" stroke="#24324a" stroke-width="12"/>
     <g transform="rotate(-15 200 256)"><rect x="110" y="126" width="180" height="260" rx="40" fill="url(#hL)" opacity=".85"/></g>
     <g transform="rotate(15 312 256)"><rect x="222" y="126" width="180" height="260" rx="40" fill="url(#hR)" opacity=".85"/></g>
-    <circle cx="256" cy="256" r="64" fill="#fff"/>
+    <circle cx="256" cy="256" r="64" fill="#111827" stroke="#334155" stroke-width="6"/>
     <path d="M220 236h44v-12l28 18-28 18v-12h-44z" fill="#4776E6"/><path d="M292 264h-44v-12l-28 18 28 18v-12h44z" fill="#FF0F7B"/>
   </svg>
   <span id="app-title">ConvertEasy Pro</span>
@@ -293,16 +596,16 @@ select,.num-input{background:#fff !important;border:1px solid #dfe3f2 !important
     <p>Choose an option to get started</p>
     <div class="select-options">
       <label class="select-card gallery" for="fileInput">
-        <span class="select-icon">🖼️</span><strong>Gallery</strong><span class="select-arrow">→</span>
+        <span class="select-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="9" r="1.6" fill="currentColor"/><path d="M5.5 17l4.3-4.2 3.1 3 2.2-2.2 3.4 3.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><strong>Gallery</strong><span class="select-arrow">→</span>
       </label>
       <label class="select-card camera" for="cameraInput">
-        <span class="select-icon">📷</span><strong>Camera</strong><span class="select-arrow">→</span>
+        <span class="select-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 6l1.3-2h5.4L16 6h2.2A2.8 2.8 0 0 1 21 8.8v8.4a2.8 2.8 0 0 1-2.8 2.8H5.8A2.8 2.8 0 0 1 3 17.2V8.8A2.8 2.8 0 0 1 5.8 6H8z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="13" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></span><strong>Camera</strong><span class="select-arrow">→</span>
       </label>
       <label class="select-card files" for="fileBrowser">
-        <span class="select-icon">📁</span><strong>Files</strong><span class="select-arrow">→</span>
+        <span class="select-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3.5 7.5A2.5 2.5 0 0 1 6 5h4l1.8 2h6.2A2.5 2.5 0 0 1 20.5 9.5v8A2.5 2.5 0 0 1 18 20H6a2.5 2.5 0 0 1-2.5-2.5v-10z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span><strong>Files</strong><span class="select-arrow">→</span>
       </label>
       <label class="select-card resize-only" for="resizeOnlyInput">
-        <span class="select-icon">↔️</span><strong>Resize</strong><span class="select-arrow">→</span>
+        <span class="select-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 9V5h4M19 15v4h-4M5 5l5 5M19 19l-5-5M19 9V5h-4M5 15v4h4M19 5l-5 5M5 19l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><strong>Resize</strong><span class="select-arrow">→</span>
       </label>
     </div>
     <div class="dashboard-message">
@@ -313,6 +616,32 @@ select,.num-input{background:#fff !important;border:1px solid #dfe3f2 !important
       </div>
     </div>
     <div class="privacy-note dashboard-privacy">🔒 <strong>Your privacy comes first.</strong> Files are processed locally in your browser. ConvertEasy Pro does not upload or automatically store your files. When you go back, the temporary web session is cleared and you can start fresh.</div>
+    <section class="dashboard-professional">
+      <div class="dashboard-professional-heading">
+        <span class="dashboard-eyebrow">CONVERTEASY PRO WORKSPACE</span>
+        <h2>Everything you need for everyday file work</h2>
+        <p>Convert, resize and manage your files in one clean, simple workspace.</p>
+      </div>
+      <div class="professional-grid">
+        <div class="professional-card">
+          <div class="professional-card-icon convert">⇄</div>
+          <div><strong>Convert files</strong><span>Turn supported files into the format you need.</span></div>
+        </div>
+        <div class="professional-card">
+          <div class="professional-card-icon resize">↗</div>
+          <div><strong>Resize with ease</strong><span>Adjust image dimensions before or after conversion.</span></div>
+        </div>
+        <div class="professional-card">
+          <div class="professional-card-icon manage">✓</div>
+          <div><strong>Ready to share</strong><span>Save, rename and share your finished file.</span></div>
+        </div>
+      </div>
+      <div class="dashboard-trust-row">
+        <span>⚡ Simple workflow</span>
+        <span>🔒 Browser-based processing</span>
+        <span>📤 Easy sharing</span>
+      </div>
+    </section>
     <input type="file" id="fileInput" accept="image/*">
     <input type="file" id="fileBrowser" accept="image/*,application/pdf,.pdf,.doc,.docx,.txt,.csv,.xls,.xlsx,.ppt,.pptx,.rtf">
     <input type="file" id="cameraInput" accept="image/*" capture="environment">
@@ -323,7 +652,17 @@ select,.num-input{background:#fff !important;border:1px solid #dfe3f2 !important
 <div id="conversion-view" class="full-screen-view">
   <div class="view-header">
     <button class="back-btn" onclick="closeView('conversion-view')">← Back</button>
-    <strong style="margin-left:auto;color:#25204d">ConvertEasy Pro</strong>
+    <div class="view-brand" aria-label="ConvertEasy Pro">
+      <svg class="view-logo" viewBox="0 0 512 512" aria-hidden="true">
+        <defs><linearGradient id="vL" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#FF0F7B"/><stop offset="100%" stop-color="#F89B29"/></linearGradient><linearGradient id="vR"><stop offset="0%" stop-color="#4776E6"/><stop offset="100%" stop-color="#8E54E9"/></linearGradient></defs>
+        <rect x="32" y="32" width="448" height="448" rx="100" fill="#0b1220" stroke="#24324a" stroke-width="12"/>
+        <g transform="rotate(-15 200 256)"><rect x="110" y="126" width="180" height="260" rx="40" fill="url(#vL)" opacity=".9"/></g>
+        <g transform="rotate(15 312 256)"><rect x="222" y="126" width="180" height="260" rx="40" fill="url(#vR)" opacity=".9"/></g>
+        <circle cx="256" cy="256" r="64" fill="#111827" stroke="#334155" stroke-width="6"/>
+        <path d="M220 236h44v-12l28 18-28 18v-12h-44z" fill="#4776E6"/><path d="M292 264h-44v-12l-28 18 28 18v-12h44z" fill="#FF0F7B"/>
+      </svg>
+      <strong>ConvertEasy Pro</strong>
+    </div>
   </div>
   <div class="conversion-workspace">
     <section class="workspace-card preview-panel">
@@ -362,15 +701,15 @@ select,.num-input{background:#fff !important;border:1px solid #dfe3f2 !important
         <div class="btn-group conversion-actions">
           <button id="convertBtn" class="primary-btn convert-action" onclick="handleAction('preview')">⚙️ Convert & Preview</button>
           <button id="sourceResizeBtn" class="primary-btn resize-action" onclick="openUnifiedResizeModal()">↔️ Resize</button>
-          <button id="resizeOnlyBtn" class="primary-btn resize-action" style="display:none" onclick="openUnifiedResizeModal()">↔️ Resize</button>
-          <button id="conversionResizeBtn" class="primary-btn resize-action" style="display:none" onclick="openUnifiedResizeModal()">↔️ Resize</button>
+          <button id="resizeOnlyBtn" class="primary-btn resize-action" style="display:none" aria-hidden="true" tabindex="-1">↔️ Resize</button>
+          <button id="conversionResizeBtn" class="primary-btn resize-action" style="display:none" aria-hidden="true" tabindex="-1">↔️ Resize</button>
           <button id="downloadBtn" class="primary-btn save-action" style="display:none" onclick="saveCurrentResult()">💾 Save</button>
           <button id="renameResultBtn" class="primary-btn rename-action" style="display:none" onclick="renameCurrentResult()">✏️ Rename</button>
           <button id="deleteResultBtn" class="primary-btn delete-action" style="display:none" onclick="deleteCurrentResult()">🗑️ Clear</button>
           <button id="shareBtn" class="primary-btn share-action" style="display:none" onclick="shareCurrentResult()">📤 Share</button>
         </div>
         <div id="result-preview-card" class="result-preview-card">
-          <h4>Converted Preview</h4>
+          <h4>✨ Converted file preview</h4>
           <div id="result-preview-label" style="color:#6b7280;font-size:14px">Review your converted file before saving.</div>
         </div>
       </div>
@@ -410,7 +749,12 @@ select,.num-input{background:#fff !important;border:1px solid #dfe3f2 !important
     </div>
     <p style="color:#5f6368;margin-bottom:15px;font-size:14px;line-height:1.4">Enter a percentage. The resized result will be previewed first. Nothing is downloaded automatically.</p>
     <label style="font-weight:bold;font-size:14px;display:block;margin-bottom:8px">Target Size Percentage (%)</label>
-    <input type="number" id="resize-input" class="num-input" value="50" min="1" max="100">
+    <div class="resize-stepper">
+      <button type="button" class="resize-step-btn" onclick="changeResizePercent(-10)" aria-label="Decrease resize percentage">↙</button>
+      <input type="number" id="resize-input" class="num-input" value="100" min="10" max="300" step="10" inputmode="numeric" aria-label="Resize percentage">
+      <button type="button" class="resize-step-btn" onclick="changeResizePercent(10)" aria-label="Increase resize percentage">↗</button>
+    </div>
+    <div class="resize-range-note">10% = smaller · 100% = original · 300% = larger</div>
     <button class="primary-btn gradient-btn" onclick="applyResize()">✨ APPLY RESIZE</button>
   </div>
 </div>
@@ -565,7 +909,7 @@ async function openHistoryItem(id){
   if(!item)return;
   currentActiveItemId=id;
   currentViewerFile=item;
-  $('file-viewer-view').style.display='flex';
+  showAppView('file-viewer-view');
   const info=document.getElementById('viewer-file-info');
   if(info) info.innerHTML='<div class="file-info-row"><strong>File</strong><span>'+escapeHtml(item.name)+'</span></div><div class="file-info-row"><strong>Size</strong><span>'+formatBytes(item.size)+'</span></div>';
   $('view-preview-img').style.display='none';
@@ -673,23 +1017,64 @@ function clearConversionSession(){
   ['fileInput','fileBrowser','cameraInput','resizeOnlyInput'].forEach(id=>{ if($(id))$(id).value=''; });
 }
 
+function showAppView(id){
+  const view=$(id);
+  if(!view)return;
+  window._activeAppView=id;
+  view.style.display='flex';
+  // Add one in-app history entry so the phone/browser Back button
+  // returns to the dashboard instead of leaving ConvertEasy Pro.
+  history.pushState({convertEasyView:id}, '', location.href);
+}
+
+function hideAppView(id){
+  const view=$(id);
+  if(!view)return;
+  view.style.display='none';
+  if(window._activeAppView===id) window._activeAppView=null;
+}
+
+function handleAppBack(){
+  const id=window._activeAppView;
+  if(id){
+    if(id==='conversion-view') clearConversionSession();
+    hideAppView(id);
+    if($('dashboard-view')) $('dashboard-view').style.display='block';
+    if(id==='file-viewer-view'){ currentActiveItemId=null; currentViewerFile=null; }
+    if(id==='conversion-view') showToast('Session cleared. Please select a new file.');
+  }
+}
+
+// Keep the app's internal screens inside the website history.
+if(!history.state || !history.state.convertEasyBase){
+  history.replaceState({convertEasyBase:true}, '', location.href);
+}
+window.addEventListener('popstate', function(){
+  handleAppBack();
+});
+
 function closeView(id){
+  if((id==='conversion-view' || id==='file-viewer-view') && window._activeAppView===id){
+    // Visible Back buttons use the same single-step history behavior as
+    // the phone/browser Back button.
+    history.back();
+    return;
+  }
   if(id==='conversion-view'){
     clearConversionSession();
-    $(id).style.display='none';
+    hideAppView(id);
     $('dashboard-view').style.display='block';
     showToast('Session cleared. Please select a new file.');
     return;
   }
-  $(id).style.display='none';
+  hideAppView(id);
   if(id==='file-viewer-view'){
     currentActiveItemId=null;
     currentViewerFile=null;
   }
-  if(id==='resize-modal'){ $('resize-input').value=50; delete $('resize-modal').dataset.mode; }
+  if(id==='resize-modal'){ $('resize-input').value=100; delete $('resize-modal').dataset.mode; }
   if(id==='rename-modal'){ delete window.renameTargetId; delete window.renameTargetResult; }
 }
-
 function readFileAsDataURL(file){
   return new Promise((resolve,reject)=>{
     const reader=new FileReader();
@@ -728,12 +1113,19 @@ function makeThumbnail(img){
   return c.toDataURL('image/jpeg',.72);
 }
 
+function changeResizePercent(delta){
+  const input=$('resize-input');
+  if(!input)return;
+  const current=Number(input.value)||100;
+  input.value=Math.min(300,Math.max(10,current+delta));
+}
+
 function openResizeOnlyModal(){
   if(!window.selectedSourceFile){ showToast('Please select a file first.'); return; }
   const modal=$('resize-modal');
   modal.dataset.mode='resize-only';
   modal.style.display='flex';
-  $('resize-input').value=50;
+  $('resize-input').value=100;
   const title=modal.querySelector('h3');
   if(title) title.textContent='Resize File';
 }
@@ -743,7 +1135,7 @@ async function resizeOnlyFile(){
   // the user to resize the result repeatedly (e.g. 100% -> 70% -> 50%).
   const working = lastGeneratedResult || window.selectedSourceFile;
   if(!working){showToast('Please select a file first.');return;}
-  const pct=Math.min(100,Math.max(1,Number($('resize-input').value)||50));
+  const pct=Math.min(300,Math.max(10,Number($('resize-input').value)||100));
   const btn=document.querySelector('#resize-modal .modal-content .primary-btn');
   if(btn){btn.disabled=true;btn.textContent='Resizing...';}
   try{
@@ -808,11 +1200,13 @@ async function resizeOnlyFile(){
     $('shareBtn').style.display=navigator.share?'flex':'none';
     $('renameResultBtn').style.display='flex';
     $('deleteResultBtn').style.display='flex';
-    $('resizeOnlyBtn').style.display='flex';
-    $('conversionResizeBtn').style.display='flex';
+    $('resizeOnlyBtn').style.display='none';
+    $('conversionResizeBtn').style.display='none';
     $('convertBtn').style.display='flex';
     $('convertBtn').innerHTML='⚙️ Convert Resized File';
     $('sourceResizeBtn').style.display='flex';
+    $('resizeOnlyBtn').style.display='none';
+    $('conversionResizeBtn').style.display='none';
 
     // Keep BOTH before and after visible: original stays in #preview, current
     // resized result appears in #result-preview.
@@ -836,6 +1230,14 @@ async function resizeOnlyFile(){
   }catch(err){console.error('Resize error:',err);showToast('Resize failed. Please try again.');}
   finally{if(btn){btn.disabled=false;btn.textContent='✨ APPLY RESIZE';}}
 }
+function showPdfResizeControls(){
+  // Keep one Resize control visible for PDF files, even if a browser reports
+  // an unusual MIME type. The file extension is checked separately.
+  if($('sourceResizeBtn')) $('sourceResizeBtn').style.display='flex';
+  if($('resizeOnlyBtn')) $('resizeOnlyBtn').style.display='none';
+  if($('conversionResizeBtn')) $('conversionResizeBtn').style.display='none';
+}
+
 async function handleResizeOnlySelection(e){
   const file=e.target.files && e.target.files[0];
   e.target.value='';
@@ -851,7 +1253,10 @@ async function handleResizeOnlySelection(e){
   $('result-preview-card').style.display='none';
   $('result-preview-block').style.display='none';
   $('downloadBtn').style.display='none';
-  const sb=$('source-preview-block').querySelector('.preview-label'); if(sb) sb.textContent='BEFORE — ORIGINAL FILE';$('shareBtn').style.display='none';$('renameResultBtn').style.display='none';$('deleteResultBtn').style.display='none';$('conversionResizeBtn').style.display='none';$('convertBtn').style.display='none';$('sourceResizeBtn').style.display='none';$('resizeOnlyBtn').style.display='flex';
+  const sb=$('source-preview-block').querySelector('.preview-label'); if(sb) sb.textContent='BEFORE — ORIGINAL FILE';$('shareBtn').style.display='none';$('renameResultBtn').style.display='none';$('deleteResultBtn').style.display='none';$('conversionResizeBtn').style.display='none';$('convertBtn').style.display='none';
+// Use one visible Resize control for every device/browser.
+$('resizeOnlyBtn').style.display='none';
+$('sourceResizeBtn').style.display='flex';
   $('format-controls').style.display='none';
   $('resize-only-heading').style.display='block';
   $('preview-empty').style.display='none';
@@ -863,14 +1268,21 @@ async function handleResizeOnlySelection(e){
     $('preview').src=data;$('preview').style.display='block';
     $('original-info').innerHTML='<div class="file-info-row"><strong>Selected file</strong><span>'+escapeHtml(file.name)+'</span></div><div class="file-info-row"><strong>Size</strong><span>'+formatBytes(file.size)+'</span></div><div class="file-info-row"><strong>Dimensions</strong><span>'+img.naturalWidth+' × '+img.naturalHeight+' px</span></div>';
   }else if(file.type==='application/pdf' || /\.pdf$/i.test(file.name)){
+    showPdfResizeControls();
     const url=URL.createObjectURL(file);
     if(window._sourcePreviewUrl)URL.revokeObjectURL(window._sourcePreviewUrl);
     window._sourcePreviewUrl=url;$('source-pdf-preview-frame').src=url;$('source-pdf-preview-frame').style.display='block';
     $('original-info').innerHTML='<div class="file-info-row"><strong>Selected file</strong><span>'+escapeHtml(file.name)+'</span></div><div class="file-info-row"><strong>Size</strong><span>'+formatBytes(file.size)+'</span></div><div class="file-info-row"><strong>Type</strong><span>PDF document</span></div>';
   }else{
-    resizeOnlyMode=false;$('resizeOnlyBtn').style.display='none';$('format-controls').style.display='block';$('resize-only-heading').style.display='none';showToast('Resize currently supports images and PDF files.');return;
+    resizeOnlyMode=false;
+    $('resizeOnlyBtn').style.display='none';
+    $('sourceResizeBtn').style.display='none';
+    $('format-controls').style.display='block';
+    $('resize-only-heading').style.display='none';
+    showToast('Resize supports image and PDF files. This file type can still be converted.');
+    return;
   }
-  $('conversion-view').style.display='flex';
+  showAppView('conversion-view');
   showToast('File selected. Choose the resize size.');
 }
 
@@ -910,11 +1322,12 @@ async function handleFileSelection(e){
       $('preview').style.display='block';
       $('preview-empty').style.display='none';
       $('original-info').innerHTML='<div class="file-info-row"><strong>Selected file</strong><span>'+escapeHtml(file.name)+'</span></div><div class="file-info-row"><strong>Size</strong><span>'+formatBytes(file.size)+'</span></div><div class="file-info-row"><strong>Dimensions</strong><span>'+img.naturalWidth+' × '+img.naturalHeight+' px</span></div>';
-      $('conversion-view').style.display='flex';
+      showAppView('conversion-view');
       return;
     }
 
     if(file.type==='application/pdf' || /\.pdf$/i.test(file.name)){
+      showPdfResizeControls();
       const url=URL.createObjectURL(file);
       if(window._sourcePreviewUrl)URL.revokeObjectURL(window._sourcePreviewUrl);
       window._sourcePreviewUrl=url;
@@ -922,11 +1335,17 @@ async function handleFileSelection(e){
       $('source-pdf-preview-frame').style.display='block';
       $('preview-empty').style.display='none';
       $('original-info').innerHTML='<div class="file-info-row"><strong>Selected file</strong><span>'+escapeHtml(file.name)+'</span></div><div class="file-info-row"><strong>Size</strong><span>'+formatBytes(file.size)+'</span></div><div class="file-info-row"><strong>Type</strong><span>PDF document</span></div>';
-      $('convertBtn').style.display='none';
-      $('sourceResizeBtn').style.display='none';
+      // PDFs can be converted to JPG or PNG. Keep the format selector and
+      // Convert button visible for PDF input.
+      $('convertBtn').style.display='flex';
+      $('convertBtn').innerHTML='⚙️ Convert & Preview';
+      // PDF files can also be resized before conversion. Keep the main
+      // Resize button visible and route it through the PDF-aware resize flow.
+      $('sourceResizeBtn').style.display='flex';
       $('conversionResizeBtn').style.display='none';
-      $('conversion-view').style.display='flex';
-      showToast('PDF opened for local preview.');
+      $('format-controls').style.display='block';
+      showAppView('conversion-view');
+      showToast('PDF opened. You can Resize the PDF first, or choose JPG/PNG and Convert.');
       return;
     }
 
@@ -937,7 +1356,7 @@ async function handleFileSelection(e){
     $('original-info').innerHTML='<div class="file-info-row"><strong>Selected file</strong><span>'+escapeHtml(file.name)+'</span></div><div class="file-info-row"><strong>Size</strong><span>'+formatBytes(file.size)+'</span></div><div class="file-info-row"><strong>Type</strong><span>'+escapeHtml(file.type||'Document')+'</span></div>';
     $('convertBtn').style.display='none';
     $('sourceResizeBtn').style.display='none';
-    $('conversion-view').style.display='flex';
+    showAppView('conversion-view');
     showToast('File selected. No copy was saved.');
   }catch(err){console.error(err);showToast('Could not open the file.');}
 }
@@ -958,21 +1377,137 @@ function canvasBlob(canvas,type,quality){
 
 async function generateFile(){
   const format=$('formatSelect').value;
+  const source=window.selectedSourceFile;
+  if(!source)throw new Error('No file selected.');
+
+  // PDF -> JPG/PNG: render every PDF page locally with PDF.js.
+  // One-page PDFs produce a normal JPG/PNG. Multi-page PDFs are packaged
+  // as a ZIP containing one image per page so no pages are silently lost.
+  if(source.type==='application/pdf' || /\.pdf$/i.test(source.name)){
+    if(format!=='jpeg' && format!=='png'){
+      throw new Error('Please choose JPG or PNG for PDF conversion.');
+    }
+
+    const pdfjs=await loadPdfJs();
+    const pdf=await pdfjs.getDocument({data:await source.arrayBuffer()}).promise;
+    if(!pdf.numPages)throw new Error('PDF has no pages.');
+
+    const mime=format==='png'?'image/png':'image/jpeg';
+    const ext=format==='png'?'.png':'.jpg';
+    const baseName=originalFileName||source.name.replace(/\.pdf$/i,'')||'converted';
+    const renderScale=1.5;
+    const pages=[];
+    let firstPreviewBlob=null;
+    let firstWidth=0;
+    let firstHeight=0;
+
+    for(let pageNo=1;pageNo<=pdf.numPages;pageNo++){
+      const page=await pdf.getPage(pageNo);
+      const baseViewport=page.getViewport({scale:1});
+      const viewport=page.getViewport({scale:renderScale});
+      const canvas=document.createElement('canvas');
+      canvas.width=Math.max(1,Math.ceil(viewport.width));
+      canvas.height=Math.max(1,Math.ceil(viewport.height));
+      const ctx=canvas.getContext('2d',{alpha:false});
+      ctx.fillStyle='#ffffff';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      await page.render({canvasContext:ctx,viewport}).promise;
+
+      const blob=await canvasBlob(canvas,mime,format==='jpeg'?0.92:undefined);
+      if(!blob)throw new Error('Could not create image from PDF page '+pageNo+'.');
+      if(pageNo===1){
+        firstPreviewBlob=blob;
+        firstWidth=canvas.width;
+        firstHeight=canvas.height;
+      }
+      pages.push({blob,name:baseName+'_page_'+pageNo+ext,width:canvas.width,height:canvas.height});
+      canvas.width=1;
+      canvas.height=1;
+      if(page.cleanup)page.cleanup();
+    }
+
+    if(pages.length===1){
+      return {
+        blob:pages[0].blob,
+        previewBlob:firstPreviewBlob,
+        name:pages[0].name,
+        format:format==='png'?'PNG':'JPG',
+        mime,
+        thumbnail:'',
+        width:firstWidth,
+        height:firstHeight,
+        pageCount:1
+      };
+    }
+
+    const zip=await loadJsZip();
+    const archive=new zip();
+    pages.forEach((page)=>archive.file(page.name,page.blob));
+    const zipBlob=await archive.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}});
+    return {
+      blob:zipBlob,
+      previewBlob:firstPreviewBlob,
+      name:baseName+'_pages_'+format+'.zip',
+      format:format==='png'?'PNG ZIP':'JPG ZIP',
+      mime:'application/zip',
+      thumbnail:'',
+      width:firstWidth,
+      height:firstHeight,
+      pageCount:pages.length
+    };
+  }
+
+  if(!currentImg || !currentImg.naturalWidth)throw new Error('Please select an image.');
   const canvas=canvasFromImage(currentImg,1);
   if(format==='pdf'){
     if(!window.jspdf)throw new Error('PDF library is not available.');
     const {jsPDF}=window.jspdf;
-    // Conversion does not resize or downscale the source image.
-    // The user decides if/when to resize later.
-    const w=canvas.width,h=canvas.height;
-    const pdf=new jsPDF(w>h?'l':'p','px',[w,h]);
-    // PNG keeps the source pixels without JPEG compression during conversion.
-    pdf.addImage(canvas.toDataURL('image/png'),'PNG',0,0,w,h);
-    return {blob:pdf.output('blob'),name:originalFileName+'_converted.pdf',format:'PDF',mime:'application/pdf',thumbnail:makeThumbnail(currentImg),width:w,height:h};
+
+    // Professional JPG/PNG -> PDF layout:
+    // Use a clean A4-style page, but let the image use essentially the full
+    // printable area so scanned documents look like dedicated PDF converters.
+    // The image keeps its exact aspect ratio and is never stretched.
+    const imgW=canvas.width;
+    const imgH=canvas.height;
+    const landscape=imgW>imgH;
+    const pageW=landscape?297:210;
+    const pageH=landscape?210:297;
+    const margin=2.5;
+    const maxW=pageW-(margin*2);
+    const maxH=pageH-(margin*2);
+    const fit=Math.min(maxW/imgW,maxH/imgH);
+    const drawW=imgW*fit;
+    const drawH=imgH*fit;
+    const x=(pageW-drawW)/2;
+    const y=(pageH-drawH)/2;
+
+    const pdf=new jsPDF(landscape?'l':'p','mm',[pageW,pageH],true);
+    // Use high-quality PNG so photographed/scanned text stays crisp.
+    pdf.addImage(canvas.toDataURL('image/png'),'PNG',x,y,drawW,drawH,undefined,'FAST');
+    return {
+      blob:pdf.output('blob'),
+      name:originalFileName+'_converted.pdf',
+      format:'PDF',mime:'application/pdf',thumbnail:makeThumbnail(currentImg),
+      width:imgW,height:imgH,pageWidth:pageW,pageHeight:pageH
+    };
   }
   const mime=format==='png'?'image/png':'image/jpeg';
   const blob=await canvasBlob(canvas,mime,format==='png'?undefined:1.0);
-  return {blob,name:originalFileName+(format==='png'?'_converted.png':'_converted.jpg'),format:format==='png'?'PNG':'JPG',mime,thumbnail:makeThumbnail(currentImg),width:canvas.width,height:canvas.height};
+  return {blob,name:originalFileName+(format==='png'?'_converted.png':'_converted.jpg'),format:format==='png'?'PNG':'JPG',mime,thumbnail:makeThumbnail(currentImg),width:canvas.width,height:canvas.height,previewBlob:blob};
+}
+
+let jsZipPromise=null;
+function loadJsZip(){
+  if(window.JSZip)return Promise.resolve(window.JSZip);
+  if(jsZipPromise)return jsZipPromise;
+  jsZipPromise=new Promise((resolve,reject)=>{
+    const script=document.createElement('script');
+    script.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+    script.onload=()=>window.JSZip?resolve(window.JSZip):reject(new Error('ZIP engine unavailable.'));
+    script.onerror=()=>reject(new Error('ZIP engine could not be loaded.'));
+    document.head.appendChild(script);
+  });
+  return jsZipPromise;
 }
 
 function downloadBlob(blob,name){
@@ -1011,7 +1546,7 @@ async function handleAction(action){
     lastGeneratedResult=result;
     currentResultSaved=false;
     currentHistoryId=null;
-    $('result-info').innerHTML='<div class="file-info-row"><strong>Converted</strong><span>'+escapeHtml(result.name)+'</span></div><div class="file-info-row"><strong>Size</strong><span>'+formatBytes(result.blob.size)+'</span></div><div class="file-info-row"><strong>Before → After</strong><span>'+formatBytes(window.currentOriginalSize||0)+' → '+formatBytes(result.blob.size)+'</span></div><div class="file-info-row"><strong>Dimensions</strong><span>'+result.width+' × '+result.height+' px</span></div>';
+    $('result-info').innerHTML='<div class="file-info-row"><strong>Converted</strong><span>'+escapeHtml(result.name)+'</span></div><div class="file-info-row"><strong>Size</strong><span>'+formatBytes(result.blob.size)+'</span></div><div class="file-info-row"><strong>Before → After</strong><span>'+formatBytes(window.currentOriginalSize||0)+' → '+formatBytes(result.blob.size)+'</span></div><div class="file-info-row"><strong>Format</strong><span>'+escapeHtml(result.format)+(result.pageCount>1?' • '+result.pageCount+' pages':'')+'</span></div><div class="file-info-row"><strong>Dimensions</strong><span>'+result.width+' × '+result.height+' px'+(result.pageCount>1?' (first page)':'')+'</span></div>';
     $('result-info').style.display='block';
     $('downloadBtn').style.display='flex';
     $('shareBtn').style.display=navigator.share?'flex':'none';
@@ -1029,14 +1564,41 @@ async function handleAction(action){
     const resultLabel2=$('result-preview-block').querySelector('.preview-label');
     if(resultLabel2) resultLabel2.textContent='CONVERTED FILE';
     if(result.format==='PDF'){
-      const url=URL.createObjectURL(result.blob);
-      if(window._conversionPreviewUrl)URL.revokeObjectURL(window._conversionPreviewUrl);
-      window._conversionPreviewUrl=url;
-      $('pdf-preview-frame').src=url;
-      $('pdf-preview-frame').style.display='block';
-      $('result-preview').style.display='none';
+      // Render the first PDF page back to an image for a reliable mobile preview.
+      // The original PDF remains the downloadable result.
+      try{
+        const pdfjs=await loadPdfJs();
+        const pdfDoc=await pdfjs.getDocument({data:await result.blob.arrayBuffer()}).promise;
+        const page=await pdfDoc.getPage(1);
+        const viewport=page.getViewport({scale:1.25});
+        const canvas=document.createElement('canvas');
+        canvas.width=Math.max(1,Math.ceil(viewport.width));
+        canvas.height=Math.max(1,Math.ceil(viewport.height));
+        const ctx=canvas.getContext('2d',{alpha:false});
+        ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);
+        await page.render({canvasContext:ctx,viewport}).promise;
+        const previewBlob=await canvasBlob(canvas,'image/png');
+        const url=URL.createObjectURL(previewBlob);
+        if(window._conversionPreviewUrl)URL.revokeObjectURL(window._conversionPreviewUrl);
+        window._conversionPreviewUrl=url;
+        $('result-preview').src=url;
+        $('result-preview').style.display='block';
+        $('pdf-preview-frame').style.display='none';
+        $('result-preview-label').textContent='PDF converted successfully. Previewing page 1; tap Save for the PDF file.';
+      }catch(previewErr){
+        console.warn('PDF preview image failed, using browser PDF viewer.',previewErr);
+        const url=URL.createObjectURL(result.blob);
+        if(window._conversionPreviewUrl)URL.revokeObjectURL(window._conversionPreviewUrl);
+        window._conversionPreviewUrl=url;
+        $('pdf-preview-frame').src=url;
+        $('pdf-preview-frame').style.display='block';
+        $('result-preview').style.display='none';
+      }
     }else{
-      const url=URL.createObjectURL(result.blob);
+      // For PDF -> image conversion, multi-page output is a ZIP, so preview
+      // the first converted page while Save downloads all pages.
+      const previewBlob=result.previewBlob||result.blob;
+      const url=URL.createObjectURL(previewBlob);
       if(window._conversionPreviewUrl)URL.revokeObjectURL(window._conversionPreviewUrl);
       window._conversionPreviewUrl=url;
       $('result-preview').src=url;
@@ -1059,14 +1621,21 @@ function renameCurrentResult(){
 }
 
 async function deleteCurrentResult(){
+  // Clear only the generated result. Keep the current source file and the
+  // same Resize workspace so the user can immediately resize it again.
   lastGeneratedResult=null; currentHistoryId=null; currentResultSaved=false;
-  $('result-info').style.display='none'; $('downloadBtn').style.display='none'; $('renameResultBtn').style.display='none'; $('deleteResultBtn').style.display='none'; $('shareBtn').style.display='none'; $('conversionResizeBtn').style.display='none'; $('sourceResizeBtn').style.display='flex';
+  $('result-info').style.display='none';
+  $('downloadBtn').style.display='none';
+  $('renameResultBtn').style.display='none';
+  $('deleteResultBtn').style.display='none';
+  $('shareBtn').style.display='none';
+  $('conversionResizeBtn').style.display='none';
+  $('resizeOnlyBtn').style.display='none';
+  $('sourceResizeBtn').style.display='flex';
   if(resizeOnlyMode){
-    $('sourceResizeBtn').style.display='none';
     $('convertBtn').style.display='none';
-    $('resizeOnlyBtn').style.display='flex';
+    $('resize-only-heading').style.display='block';
   }else{
-    $('sourceResizeBtn').style.display='flex';
     $('convertBtn').style.display='flex';
   }
   $('result-preview-card').style.display='none';
@@ -1089,17 +1658,19 @@ async function shareCurrentResult(){
 async function saveResultToHistory(result){ return null; }
 
 function openUnifiedResizeModal(){
-  // One Resize button handles every stage: original file, resized result, or converted result.
+  // One Resize button handles every stage: original file, PDF, resized result,
+  // or converted result. PDF source files use the PDF-aware resize flow.
   if(!window.selectedSourceFile && !lastGeneratedResult){
     showToast('Please select a file first.');
     return;
   }
   const modal=$('resize-modal');
-  modal.dataset.mode = lastGeneratedResult ? 'resize-only' : 'source';
+  const sourceIsPdf=!!(window.selectedSourceFile && (window.selectedSourceFile.type==='application/pdf' || /\.pdf$/i.test(window.selectedSourceFile.name||'')));
+  modal.dataset.mode = lastGeneratedResult ? 'resize-only' : (sourceIsPdf ? 'resize-only' : 'source');
   modal.style.display='flex';
-  $('resize-input').value=50;
+  $('resize-input').value=100;
   const title=modal.querySelector('h3');
-  if(title) title.textContent=lastGeneratedResult ? 'Resize Current File' : 'Resize File';
+  if(title) title.textContent=lastGeneratedResult ? 'Resize Current File' : (sourceIsPdf ? 'Resize PDF Before Convert' : 'Resize File');
 }
 
 function openSourceResizeModal(){
@@ -1111,7 +1682,7 @@ function openSourceResizeModal(){
   const modal=$('resize-modal');
   modal.dataset.mode='source';
   modal.style.display='flex';
-  $('resize-input').value=50;
+  $('resize-input').value=100;
   const title=modal.querySelector('h3');
   if(title) title.textContent='Resize Before Convert';
 }
@@ -1121,7 +1692,7 @@ async function resizeSourceImage(){
     showToast('Please select an image first.');
     return;
   }
-  const pct=Math.min(100,Math.max(1,Number($('resize-input').value)||50));
+  const pct=Math.min(300,Math.max(10,Number($('resize-input').value)||100));
   const btn=document.querySelector('#resize-modal .modal-content .primary-btn');
   if(btn){btn.disabled=true;btn.textContent='Resizing...';}
   try{
@@ -1178,13 +1749,13 @@ function openConversionResizeModal(){
   if(!lastGeneratedResult){showToast('Convert the file first.');return}
   $('resize-modal').dataset.mode='conversion';
   $('resize-modal').style.display='flex';
-  $('resize-input').value=50;
+  $('resize-input').value=100;
   const title=$('resize-modal').querySelector('h3');
   if(title) title.textContent='Resize Converted File';
 }
 
 async function resizeConversionResult(){
-  const pct=Math.min(100,Math.max(1,Number($('resize-input').value)||50));
+  const pct=Math.min(300,Math.max(10,Number($('resize-input').value)||100));
   if(!lastGeneratedResult){showToast('Convert the file first.');return;}
   const btn=document.querySelector('#resize-modal .primary-btn');
   btn.disabled=true; btn.textContent='Resizing...';
@@ -1261,7 +1832,10 @@ async function resizePdfFile(item,pct){
   for(let pageNo=1;pageNo<=pdf.numPages;pageNo++){
     const page=await pdf.getPage(pageNo);
     const baseViewport=page.getViewport({scale:1});
-    const renderScale=Math.max(.25,Math.min(2,scale));
+    // The percentage controls the actual PDF page dimensions. Never compress
+    // an increase request back down: 100% = original, 150% = 1.5x page size,
+    // 200% = 2x, etc. Render at a matching/higher resolution as well.
+    const renderScale=Math.max(0.25, Math.min(6, scale));
     const viewport=page.getViewport({scale:renderScale});
     const c=document.createElement('canvas');
     c.width=Math.max(1,Math.round(viewport.width));
@@ -1279,8 +1853,15 @@ async function resizePdfFile(item,pct){
     }else{
       output.addPage([pageW,pageH],pageW>pageH?'l':'p');
     }
-    const quality=pct<=50?.72:.82;
-    output.addImage(c.toDataURL('image/jpeg',quality),'JPEG',0,0,pageW,pageH,undefined,'FAST');
+    // Use PNG for enlargement so the larger output is not accidentally
+    // made dramatically smaller by JPEG recompression. For reductions,
+    // JPEG keeps the output compact.
+    if(scale>1){
+      output.addImage(c.toDataURL('image/png'),'PNG',0,0,pageW,pageH,undefined,'FAST');
+    }else{
+      const quality=pct<=50?.72:.82;
+      output.addImage(c.toDataURL('image/jpeg',quality),'JPEG',0,0,pageW,pageH,undefined,'FAST');
+    }
   }
 
   const blob=output.output('blob');
@@ -1309,10 +1890,10 @@ async function applyResize(){
     return;
   }
   if(!currentViewerFile)return;
-  const pct=Math.min(100,Math.max(1,Number($('resize-input').value)||50));
+  const pct=Math.min(300,Math.max(10,Number($('resize-input').value)||100));
   const btn=document.querySelector('#resize-modal .primary-btn');
   btn.disabled=true;
-  btn.textContent=currentViewerFile.mime==='application/pdf'?'Compressing PDF...':'Resizing...';
+  btn.textContent='Resizing...';
   try{
     let newItem;
 
@@ -1431,5 +2012,19 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape' && selectedHistoryIds.size) clearSelection();
 });
 </script>
+
+<section id="seo-tools" style="max-width:1100px;margin:26px auto;padding:24px;border-radius:22px;background:rgba(255,255,255,.94);border:1px solid #dbe4f0;box-shadow:0 12px 30px rgba(15,23,42,.08);">
+  <h2 style="margin:0 0 8px;color:#172033;">ConvertEasy Pro Tools</h2>
+  <p style="margin:0 0 16px;color:#64748b;">Quick access to popular file conversion and resizing workflows.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;">
+    <a href="jpg-to-pdf.html" style="padding:14px;border-radius:14px;background:#eef6ff;color:#1e3a8a;font-weight:800;text-decoration:none;">JPG to PDF</a>
+    <a href="pdf-to-jpg.html" style="padding:14px;border-radius:14px;background:#f3edff;color:#5b21b6;font-weight:800;text-decoration:none;">PDF to JPG</a>
+    <a href="png-to-jpg.html" style="padding:14px;border-radius:14px;background:#ecfff8;color:#047857;font-weight:800;text-decoration:none;">PNG to JPG</a>
+    <a href="jpg-to-png.html" style="padding:14px;border-radius:14px;background:#ecfeff;color:#0e7490;font-weight:800;text-decoration:none;">JPG to PNG</a>
+    <a href="image-resizer.html" style="padding:14px;border-radius:14px;background:#fff7ed;color:#c2410c;font-weight:800;text-decoration:none;">Image Resizer</a>
+    <a href="pdf-resizer.html" style="padding:14px;border-radius:14px;background:#ecfeff;color:#155e75;font-weight:800;text-decoration:none;">PDF Resizer</a>
+  </div>
+</section>
+
 </body>
 </html>
