@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="converteasy-resize-fix" content="converteasy-resize-fix-v2">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#5b4bff">
 <meta name="application-name" content="ConvertEasy Pro">
@@ -481,62 +480,6 @@ select,.num-input,.rename-input{background:#111827 !important;color:#f8fafc !imp
 .files{background:linear-gradient(145deg,#edfff8,#e2f8f1) !important;}
 .resize-only{background:linear-gradient(145deg,#fff7eb,#ffeed9) !important;}
 .home-select p{color:#475569 !important;}
-
-/* Final resize UX: one button, visible brand logo, and increase/decrease controls */
-.view-header{justify-content:space-between !important;}
-.view-brand{display:flex;align-items:center;gap:9px;margin-left:auto;color:#f8fafc;font-weight:800;}
-.view-logo{width:38px;height:38px;flex:none;filter:drop-shadow(0 4px 10px rgba(0,0,0,.3));}
-.view-brand strong{font-size:18px;letter-spacing:.1px;color:#f8fafc !important;}
-.resize-stepper{display:grid;grid-template-columns:52px minmax(0,1fr) 52px;gap:10px;align-items:center;margin-bottom:7px;}
-.resize-step-btn{height:52px;border:0;border-radius:15px;background:linear-gradient(135deg,#1e40af,#7c3aed);color:#fff;font-size:30px;font-weight:800;line-height:1;box-shadow:0 7px 18px rgba(49,46,129,.25);cursor:pointer;}
-.resize-step-btn:active{transform:scale(.96);}
-#resize-input{text-align:center;font-size:20px !important;font-weight:800 !important;min-width:0;}
-.resize-range-note{text-align:center;color:#64748b;font-size:12px;margin:0 0 14px;}
-/* Only the unified Resize control is allowed to appear in the action row. */
-#resizeOnlyBtn,#conversionResizeBtn{display:none !important;}
-
-/* Final universal layout/resize fixes */
-#dashboard-view{height:auto !important;min-height:calc(100vh - 74px) !important;overflow:visible !important;}
-.home-select{line-height:1.45 !important;}
-.dashboard-message,.dashboard-message *,.dashboard-professional,.dashboard-professional *{box-sizing:border-box !important;}
-.dashboard-message p,.dashboard-professional-heading p,.professional-card span{line-height:1.5 !important;overflow-wrap:anywhere !important;}
-.professional-card strong{line-height:1.25 !important;}
-.view-brand{flex-shrink:0 !important;}
-.view-brand strong{white-space:nowrap !important;}
-.resize-step-btn{display:flex !important;align-items:center !important;justify-content:center !important;font-family:Arial,sans-serif !important;font-size:28px !important;}
-@media(max-width:800px){
-  #dashboard-view{height:auto !important;min-height:calc(100vh - 68px) !important;overflow:visible !important;}
-  .home-select{padding-top:26px !important;padding-bottom:42px !important;}
-  .select-options{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:14px !important;max-width:900px !important;}
-  .select-card{min-height:150px !important;padding:16px 12px !important;display:flex !important;text-align:center !important;gap:10px !important;align-items:center !important;justify-content:center !important;}
-  .select-card strong{font-size:18px !important;line-height:1.2 !important;white-space:normal !important;}
-  .select-icon{width:62px !important;height:62px !important;font-size:36px !important;}
-  .select-arrow{width:36px !important;height:36px !important;font-size:20px !important;}
-  .dashboard-message{margin-top:18px !important;padding:16px !important;display:flex !important;gap:12px !important;align-items:flex-start !important;}
-  .dashboard-message p{margin-top:5px !important;margin-bottom:0 !important;}
-  .dashboard-professional{margin-top:18px !important;padding:20px 16px !important;}
-  .professional-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:10px !important;}
-  .professional-card{min-height:108px !important;padding:14px !important;align-items:flex-start !important;}
-  .professional-card-icon{width:40px !important;height:40px !important;font-size:21px !important;}
-  .professional-card strong{font-size:14px !important;}
-  .professional-card span{font-size:11px !important;}
-  .dashboard-trust-row{gap:7px !important;}
-  .dashboard-trust-row span{font-size:11px !important;padding:7px 9px !important;}
-  .view-brand strong{font-size:15px !important;}
-  .view-logo{width:40px !important;height:40px !important;}
-}
-@media(max-width:430px){
-  .select-card{min-height:140px !important;}
-  .professional-grid{grid-template-columns:1fr !important;}
-  .professional-card{min-height:82px !important;}
-}
-@media(max-width:800px){
-  .view-logo{width:42px;height:42px;}
-  .view-brand strong{font-size:16px;}
-  .view-header{padding-left:10px !important;padding-right:12px !important;}
-  .resize-stepper{grid-template-columns:48px minmax(0,1fr) 48px;gap:8px;}
-  .resize-step-btn{height:50px;}
-}
 </style>
 
 
@@ -652,17 +595,7 @@ select,.num-input,.rename-input{background:#111827 !important;color:#f8fafc !imp
 <div id="conversion-view" class="full-screen-view">
   <div class="view-header">
     <button class="back-btn" onclick="closeView('conversion-view')">← Back</button>
-    <div class="view-brand" aria-label="ConvertEasy Pro">
-      <svg class="view-logo" viewBox="0 0 512 512" aria-hidden="true">
-        <defs><linearGradient id="vL" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#FF0F7B"/><stop offset="100%" stop-color="#F89B29"/></linearGradient><linearGradient id="vR"><stop offset="0%" stop-color="#4776E6"/><stop offset="100%" stop-color="#8E54E9"/></linearGradient></defs>
-        <rect x="32" y="32" width="448" height="448" rx="100" fill="#0b1220" stroke="#24324a" stroke-width="12"/>
-        <g transform="rotate(-15 200 256)"><rect x="110" y="126" width="180" height="260" rx="40" fill="url(#vL)" opacity=".9"/></g>
-        <g transform="rotate(15 312 256)"><rect x="222" y="126" width="180" height="260" rx="40" fill="url(#vR)" opacity=".9"/></g>
-        <circle cx="256" cy="256" r="64" fill="#111827" stroke="#334155" stroke-width="6"/>
-        <path d="M220 236h44v-12l28 18-28 18v-12h-44z" fill="#4776E6"/><path d="M292 264h-44v-12l-28 18 28 18v-12h44z" fill="#FF0F7B"/>
-      </svg>
-      <strong>ConvertEasy Pro</strong>
-    </div>
+    <strong style="margin-left:auto;color:#25204d">ConvertEasy Pro</strong>
   </div>
   <div class="conversion-workspace">
     <section class="workspace-card preview-panel">
@@ -701,8 +634,8 @@ select,.num-input,.rename-input{background:#111827 !important;color:#f8fafc !imp
         <div class="btn-group conversion-actions">
           <button id="convertBtn" class="primary-btn convert-action" onclick="handleAction('preview')">⚙️ Convert & Preview</button>
           <button id="sourceResizeBtn" class="primary-btn resize-action" onclick="openUnifiedResizeModal()">↔️ Resize</button>
-          <button id="resizeOnlyBtn" class="primary-btn resize-action" style="display:none" aria-hidden="true" tabindex="-1">↔️ Resize</button>
-          <button id="conversionResizeBtn" class="primary-btn resize-action" style="display:none" aria-hidden="true" tabindex="-1">↔️ Resize</button>
+          <button id="resizeOnlyBtn" class="primary-btn resize-action" style="display:none" onclick="openUnifiedResizeModal()">↔️ Resize</button>
+          <button id="conversionResizeBtn" class="primary-btn resize-action" style="display:none" onclick="openUnifiedResizeModal()">↔️ Resize</button>
           <button id="downloadBtn" class="primary-btn save-action" style="display:none" onclick="saveCurrentResult()">💾 Save</button>
           <button id="renameResultBtn" class="primary-btn rename-action" style="display:none" onclick="renameCurrentResult()">✏️ Rename</button>
           <button id="deleteResultBtn" class="primary-btn delete-action" style="display:none" onclick="deleteCurrentResult()">🗑️ Clear</button>
@@ -749,12 +682,7 @@ select,.num-input,.rename-input{background:#111827 !important;color:#f8fafc !imp
     </div>
     <p style="color:#5f6368;margin-bottom:15px;font-size:14px;line-height:1.4">Enter a percentage. The resized result will be previewed first. Nothing is downloaded automatically.</p>
     <label style="font-weight:bold;font-size:14px;display:block;margin-bottom:8px">Target Size Percentage (%)</label>
-    <div class="resize-stepper">
-      <button type="button" class="resize-step-btn" onclick="changeResizePercent(-10)" aria-label="Decrease resize percentage">↙</button>
-      <input type="number" id="resize-input" class="num-input" value="100" min="10" max="300" step="10" inputmode="numeric" aria-label="Resize percentage">
-      <button type="button" class="resize-step-btn" onclick="changeResizePercent(10)" aria-label="Increase resize percentage">↗</button>
-    </div>
-    <div class="resize-range-note">10% = smaller · 100% = original · 300% = larger</div>
+    <input type="number" id="resize-input" class="num-input" value="50" min="1" max="100">
     <button class="primary-btn gradient-btn" onclick="applyResize()">✨ APPLY RESIZE</button>
   </div>
 </div>
@@ -1072,7 +1000,7 @@ function closeView(id){
     currentActiveItemId=null;
     currentViewerFile=null;
   }
-  if(id==='resize-modal'){ $('resize-input').value=100; delete $('resize-modal').dataset.mode; }
+  if(id==='resize-modal'){ $('resize-input').value=50; delete $('resize-modal').dataset.mode; }
   if(id==='rename-modal'){ delete window.renameTargetId; delete window.renameTargetResult; }
 }
 function readFileAsDataURL(file){
@@ -1113,19 +1041,12 @@ function makeThumbnail(img){
   return c.toDataURL('image/jpeg',.72);
 }
 
-function changeResizePercent(delta){
-  const input=$('resize-input');
-  if(!input)return;
-  const current=Number(input.value)||100;
-  input.value=Math.min(300,Math.max(10,current+delta));
-}
-
 function openResizeOnlyModal(){
   if(!window.selectedSourceFile){ showToast('Please select a file first.'); return; }
   const modal=$('resize-modal');
   modal.dataset.mode='resize-only';
   modal.style.display='flex';
-  $('resize-input').value=100;
+  $('resize-input').value=50;
   const title=modal.querySelector('h3');
   if(title) title.textContent='Resize File';
 }
@@ -1135,7 +1056,7 @@ async function resizeOnlyFile(){
   // the user to resize the result repeatedly (e.g. 100% -> 70% -> 50%).
   const working = lastGeneratedResult || window.selectedSourceFile;
   if(!working){showToast('Please select a file first.');return;}
-  const pct=Math.min(300,Math.max(10,Number($('resize-input').value)||100));
+  const pct=Math.min(100,Math.max(1,Number($('resize-input').value)||50));
   const btn=document.querySelector('#resize-modal .modal-content .primary-btn');
   if(btn){btn.disabled=true;btn.textContent='Resizing...';}
   try{
@@ -1200,13 +1121,11 @@ async function resizeOnlyFile(){
     $('shareBtn').style.display=navigator.share?'flex':'none';
     $('renameResultBtn').style.display='flex';
     $('deleteResultBtn').style.display='flex';
-    $('resizeOnlyBtn').style.display='none';
-    $('conversionResizeBtn').style.display='none';
+    $('resizeOnlyBtn').style.display='flex';
+    $('conversionResizeBtn').style.display='flex';
     $('convertBtn').style.display='flex';
     $('convertBtn').innerHTML='⚙️ Convert Resized File';
     $('sourceResizeBtn').style.display='flex';
-    $('resizeOnlyBtn').style.display='none';
-    $('conversionResizeBtn').style.display='none';
 
     // Keep BOTH before and after visible: original stays in #preview, current
     // resized result appears in #result-preview.
@@ -1230,14 +1149,6 @@ async function resizeOnlyFile(){
   }catch(err){console.error('Resize error:',err);showToast('Resize failed. Please try again.');}
   finally{if(btn){btn.disabled=false;btn.textContent='✨ APPLY RESIZE';}}
 }
-function showPdfResizeControls(){
-  // Keep one Resize control visible for PDF files, even if a browser reports
-  // an unusual MIME type. The file extension is checked separately.
-  if($('sourceResizeBtn')) $('sourceResizeBtn').style.display='flex';
-  if($('resizeOnlyBtn')) $('resizeOnlyBtn').style.display='none';
-  if($('conversionResizeBtn')) $('conversionResizeBtn').style.display='none';
-}
-
 async function handleResizeOnlySelection(e){
   const file=e.target.files && e.target.files[0];
   e.target.value='';
@@ -1253,10 +1164,7 @@ async function handleResizeOnlySelection(e){
   $('result-preview-card').style.display='none';
   $('result-preview-block').style.display='none';
   $('downloadBtn').style.display='none';
-  const sb=$('source-preview-block').querySelector('.preview-label'); if(sb) sb.textContent='BEFORE — ORIGINAL FILE';$('shareBtn').style.display='none';$('renameResultBtn').style.display='none';$('deleteResultBtn').style.display='none';$('conversionResizeBtn').style.display='none';$('convertBtn').style.display='none';
-// Use one visible Resize control for every device/browser.
-$('resizeOnlyBtn').style.display='none';
-$('sourceResizeBtn').style.display='flex';
+  const sb=$('source-preview-block').querySelector('.preview-label'); if(sb) sb.textContent='BEFORE — ORIGINAL FILE';$('shareBtn').style.display='none';$('renameResultBtn').style.display='none';$('deleteResultBtn').style.display='none';$('conversionResizeBtn').style.display='none';$('convertBtn').style.display='none';$('sourceResizeBtn').style.display='none';$('resizeOnlyBtn').style.display='flex';
   $('format-controls').style.display='none';
   $('resize-only-heading').style.display='block';
   $('preview-empty').style.display='none';
@@ -1268,19 +1176,12 @@ $('sourceResizeBtn').style.display='flex';
     $('preview').src=data;$('preview').style.display='block';
     $('original-info').innerHTML='<div class="file-info-row"><strong>Selected file</strong><span>'+escapeHtml(file.name)+'</span></div><div class="file-info-row"><strong>Size</strong><span>'+formatBytes(file.size)+'</span></div><div class="file-info-row"><strong>Dimensions</strong><span>'+img.naturalWidth+' × '+img.naturalHeight+' px</span></div>';
   }else if(file.type==='application/pdf' || /\.pdf$/i.test(file.name)){
-    showPdfResizeControls();
     const url=URL.createObjectURL(file);
     if(window._sourcePreviewUrl)URL.revokeObjectURL(window._sourcePreviewUrl);
     window._sourcePreviewUrl=url;$('source-pdf-preview-frame').src=url;$('source-pdf-preview-frame').style.display='block';
     $('original-info').innerHTML='<div class="file-info-row"><strong>Selected file</strong><span>'+escapeHtml(file.name)+'</span></div><div class="file-info-row"><strong>Size</strong><span>'+formatBytes(file.size)+'</span></div><div class="file-info-row"><strong>Type</strong><span>PDF document</span></div>';
   }else{
-    resizeOnlyMode=false;
-    $('resizeOnlyBtn').style.display='none';
-    $('sourceResizeBtn').style.display='none';
-    $('format-controls').style.display='block';
-    $('resize-only-heading').style.display='none';
-    showToast('Resize supports image and PDF files. This file type can still be converted.');
-    return;
+    resizeOnlyMode=false;$('resizeOnlyBtn').style.display='none';$('format-controls').style.display='block';$('resize-only-heading').style.display='none';showToast('Resize currently supports images and PDF files.');return;
   }
   showAppView('conversion-view');
   showToast('File selected. Choose the resize size.');
@@ -1327,7 +1228,6 @@ async function handleFileSelection(e){
     }
 
     if(file.type==='application/pdf' || /\.pdf$/i.test(file.name)){
-      showPdfResizeControls();
       const url=URL.createObjectURL(file);
       if(window._sourcePreviewUrl)URL.revokeObjectURL(window._sourcePreviewUrl);
       window._sourcePreviewUrl=url;
@@ -1462,34 +1362,10 @@ async function generateFile(){
   if(format==='pdf'){
     if(!window.jspdf)throw new Error('PDF library is not available.');
     const {jsPDF}=window.jspdf;
-
-    // Professional JPG/PNG -> PDF layout:
-    // Use a clean A4-style page, but let the image use essentially the full
-    // printable area so scanned documents look like dedicated PDF converters.
-    // The image keeps its exact aspect ratio and is never stretched.
-    const imgW=canvas.width;
-    const imgH=canvas.height;
-    const landscape=imgW>imgH;
-    const pageW=landscape?297:210;
-    const pageH=landscape?210:297;
-    const margin=2.5;
-    const maxW=pageW-(margin*2);
-    const maxH=pageH-(margin*2);
-    const fit=Math.min(maxW/imgW,maxH/imgH);
-    const drawW=imgW*fit;
-    const drawH=imgH*fit;
-    const x=(pageW-drawW)/2;
-    const y=(pageH-drawH)/2;
-
-    const pdf=new jsPDF(landscape?'l':'p','mm',[pageW,pageH],true);
-    // Use high-quality PNG so photographed/scanned text stays crisp.
-    pdf.addImage(canvas.toDataURL('image/png'),'PNG',x,y,drawW,drawH,undefined,'FAST');
-    return {
-      blob:pdf.output('blob'),
-      name:originalFileName+'_converted.pdf',
-      format:'PDF',mime:'application/pdf',thumbnail:makeThumbnail(currentImg),
-      width:imgW,height:imgH,pageWidth:pageW,pageHeight:pageH
-    };
+    const w=canvas.width,h=canvas.height;
+    const pdf=new jsPDF(w>h?'l':'p','px',[w,h]);
+    pdf.addImage(canvas.toDataURL('image/png'),'PNG',0,0,w,h);
+    return {blob:pdf.output('blob'),name:originalFileName+'_converted.pdf',format:'PDF',mime:'application/pdf',thumbnail:makeThumbnail(currentImg),width:w,height:h};
   }
   const mime=format==='png'?'image/png':'image/jpeg';
   const blob=await canvasBlob(canvas,mime,format==='png'?undefined:1.0);
@@ -1621,21 +1497,14 @@ function renameCurrentResult(){
 }
 
 async function deleteCurrentResult(){
-  // Clear only the generated result. Keep the current source file and the
-  // same Resize workspace so the user can immediately resize it again.
   lastGeneratedResult=null; currentHistoryId=null; currentResultSaved=false;
-  $('result-info').style.display='none';
-  $('downloadBtn').style.display='none';
-  $('renameResultBtn').style.display='none';
-  $('deleteResultBtn').style.display='none';
-  $('shareBtn').style.display='none';
-  $('conversionResizeBtn').style.display='none';
-  $('resizeOnlyBtn').style.display='none';
-  $('sourceResizeBtn').style.display='flex';
+  $('result-info').style.display='none'; $('downloadBtn').style.display='none'; $('renameResultBtn').style.display='none'; $('deleteResultBtn').style.display='none'; $('shareBtn').style.display='none'; $('conversionResizeBtn').style.display='none'; $('sourceResizeBtn').style.display='flex';
   if(resizeOnlyMode){
+    $('sourceResizeBtn').style.display='none';
     $('convertBtn').style.display='none';
-    $('resize-only-heading').style.display='block';
+    $('resizeOnlyBtn').style.display='flex';
   }else{
+    $('sourceResizeBtn').style.display='flex';
     $('convertBtn').style.display='flex';
   }
   $('result-preview-card').style.display='none';
@@ -1668,7 +1537,7 @@ function openUnifiedResizeModal(){
   const sourceIsPdf=!!(window.selectedSourceFile && (window.selectedSourceFile.type==='application/pdf' || /\.pdf$/i.test(window.selectedSourceFile.name||'')));
   modal.dataset.mode = lastGeneratedResult ? 'resize-only' : (sourceIsPdf ? 'resize-only' : 'source');
   modal.style.display='flex';
-  $('resize-input').value=100;
+  $('resize-input').value=50;
   const title=modal.querySelector('h3');
   if(title) title.textContent=lastGeneratedResult ? 'Resize Current File' : (sourceIsPdf ? 'Resize PDF Before Convert' : 'Resize File');
 }
@@ -1682,7 +1551,7 @@ function openSourceResizeModal(){
   const modal=$('resize-modal');
   modal.dataset.mode='source';
   modal.style.display='flex';
-  $('resize-input').value=100;
+  $('resize-input').value=50;
   const title=modal.querySelector('h3');
   if(title) title.textContent='Resize Before Convert';
 }
@@ -1692,7 +1561,7 @@ async function resizeSourceImage(){
     showToast('Please select an image first.');
     return;
   }
-  const pct=Math.min(300,Math.max(10,Number($('resize-input').value)||100));
+  const pct=Math.min(100,Math.max(1,Number($('resize-input').value)||50));
   const btn=document.querySelector('#resize-modal .modal-content .primary-btn');
   if(btn){btn.disabled=true;btn.textContent='Resizing...';}
   try{
@@ -1749,13 +1618,13 @@ function openConversionResizeModal(){
   if(!lastGeneratedResult){showToast('Convert the file first.');return}
   $('resize-modal').dataset.mode='conversion';
   $('resize-modal').style.display='flex';
-  $('resize-input').value=100;
+  $('resize-input').value=50;
   const title=$('resize-modal').querySelector('h3');
   if(title) title.textContent='Resize Converted File';
 }
 
 async function resizeConversionResult(){
-  const pct=Math.min(300,Math.max(10,Number($('resize-input').value)||100));
+  const pct=Math.min(100,Math.max(1,Number($('resize-input').value)||50));
   if(!lastGeneratedResult){showToast('Convert the file first.');return;}
   const btn=document.querySelector('#resize-modal .primary-btn');
   btn.disabled=true; btn.textContent='Resizing...';
@@ -1832,10 +1701,7 @@ async function resizePdfFile(item,pct){
   for(let pageNo=1;pageNo<=pdf.numPages;pageNo++){
     const page=await pdf.getPage(pageNo);
     const baseViewport=page.getViewport({scale:1});
-    // The percentage controls the actual PDF page dimensions. Never compress
-    // an increase request back down: 100% = original, 150% = 1.5x page size,
-    // 200% = 2x, etc. Render at a matching/higher resolution as well.
-    const renderScale=Math.max(0.25, Math.min(6, scale));
+    const renderScale=Math.max(.25,Math.min(2,scale));
     const viewport=page.getViewport({scale:renderScale});
     const c=document.createElement('canvas');
     c.width=Math.max(1,Math.round(viewport.width));
@@ -1853,15 +1719,8 @@ async function resizePdfFile(item,pct){
     }else{
       output.addPage([pageW,pageH],pageW>pageH?'l':'p');
     }
-    // Use PNG for enlargement so the larger output is not accidentally
-    // made dramatically smaller by JPEG recompression. For reductions,
-    // JPEG keeps the output compact.
-    if(scale>1){
-      output.addImage(c.toDataURL('image/png'),'PNG',0,0,pageW,pageH,undefined,'FAST');
-    }else{
-      const quality=pct<=50?.72:.82;
-      output.addImage(c.toDataURL('image/jpeg',quality),'JPEG',0,0,pageW,pageH,undefined,'FAST');
-    }
+    const quality=pct<=50?.72:.82;
+    output.addImage(c.toDataURL('image/jpeg',quality),'JPEG',0,0,pageW,pageH,undefined,'FAST');
   }
 
   const blob=output.output('blob');
@@ -1890,10 +1749,10 @@ async function applyResize(){
     return;
   }
   if(!currentViewerFile)return;
-  const pct=Math.min(300,Math.max(10,Number($('resize-input').value)||100));
+  const pct=Math.min(100,Math.max(1,Number($('resize-input').value)||50));
   const btn=document.querySelector('#resize-modal .primary-btn');
   btn.disabled=true;
-  btn.textContent='Resizing...';
+  btn.textContent=currentViewerFile.mime==='application/pdf'?'Compressing PDF...':'Resizing...';
   try{
     let newItem;
 

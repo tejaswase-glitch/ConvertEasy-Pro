@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://tejaswase-glitch.github.io/ConvertEasy-Pro/</loc>
-  </url>
+  <url><loc>https://tejaswase-glitch.github.io/ConvertEasy-Pro/</loc></url>
+  <url><loc>https://tejaswase-glitch.github.io/ConvertEasy-Pro/jpg-to-pdf.html</loc></url>
+  <url><loc>https://tejaswase-glitch.github.io/ConvertEasy-Pro/pdf-to-jpg.html</loc></url>
+  <url><loc>https://tejaswase-glitch.github.io/ConvertEasy-Pro/png-to-jpg.html</loc></url>
+  <url><loc>https://tejaswase-glitch.github.io/ConvertEasy-Pro/jpg-to-png.html</loc></url>
+  <url><loc>https://tejaswase-glitch.github.io/ConvertEasy-Pro/image-resizer.html</loc></url>
+  <url><loc>https://tejaswase-glitch.github.io/ConvertEasy-Pro/pdf-resizer.html</loc></url>
 </urlset>
